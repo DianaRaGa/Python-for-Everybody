@@ -1,6 +1,6 @@
-===========================
+---
 # Python for Everybody – Chapter 1 Exercises
-===========================
+---
 
 ## 📘 Introduction
 
