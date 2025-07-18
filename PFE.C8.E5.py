@@ -4,7 +4,7 @@
 # the second word on the Form line. You will parse the Form line and print out the second word for each From line,
 # then you will also count the number of From (not From:) lines and print out a count at the end.
 
-from PFE.C8.E5opentxt import open_texts #Imports the function defined to prompt the user for a file name and returns
+from E_opentxt import open_texts #Imports the function defined to prompt the user for a file name and returns
 # an openable .txt file
 file = open_texts()
 count = 0
