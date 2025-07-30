@@ -38,5 +38,6 @@ with open_texts() as file:
         print(key,val)
         
     #Instead  of the last two loops the list can be sorted using this instead for improved code
+    print(f"This is the list sorted wit the sorted function")
     for key,val in sorted(hours.items()):
         print(key,val)
