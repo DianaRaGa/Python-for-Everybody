@@ -9,17 +9,17 @@ import re
 import sys
 
 #Prompting the user to a URL and finding the host and port to connect to
-user_URL=input("Please enter a URL to access to:\n")
+user_URL = input("Please enter a URL to access to:\n")
 match = re.match(r"^http://([^/]+)(/.*)", user_URL)#Getting the host and path with regular expressions
 if match:
-    host=match.group(1)#This is to extract the match in the get_host 
+    host = match.group(1)#This is to extract the match in the get_host
     path = match.group(2)
         
 else:
     print("No valid host found")
     exit()
 
-#Try and except to make the port number a integer
+#Try and except to make the port number an integer
 while True:
     user_Port=input("Please enter a number to connect to a port, or put 'done' to exit:\n")
     
