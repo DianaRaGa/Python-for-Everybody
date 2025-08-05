@@ -1,0 +1,58 @@
+#Exercise 5: (Advanced) Change the socket program so that it only shows data after the headers and a blank line have been
+# received. Remember that recv receives characters (newlines and all), not lines.
+
+# Code: https://www.py4e.com/code3/socket1.py
+import socket
+import re
+import sys
+
+#Prompting the user to a URL and finding the host and port to connect to
+user_URL=input("Please enter a URL to access to:\n")
+match = re.match(r"^https?://([^/]+)(/.*)?", user_URL)#Getting the host and path with regular expressions
+if match:
+    host = match.group(1)#This is to extract the match in the get_host
+    path = match.group(2) if match.group(2) else "/"
+        
+else:
+    print("No valid host found")
+    print(match)
+    exit()
+
+#Try and except to make the port number an integer
+while True:
+    user_Port = input("Please enter a number to connect to a port, or put 'done' to exit:\n")
+    
+    if user_Port.lower() == 'done':
+        print("Exiting the program")
+        sys.exit()
+    try:
+        user_Port = int(user_Port)
+        break
+    
+    except ValueError:
+        print("Error, the port number must be a numeric whole number value")
+    
+#Making the connection with the socket and connects to the host
+mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mysock.connect((host, user_Port))
+
+received_data = b""
+#Try and except block to try and making the connection to the URL the user put
+try:
+    cmd = f"GET {path} HTTP/1.0\r\nHost: {host}\r\n\r\n".encode()
+    mysock.send(cmd)
+
+    while True:
+        data = mysock.recv(512)
+        received_data += data
+        pos=received_data.find(b"\r\n\r\n")
+        if len(data) < 1:
+            break
+        if pos!= -1:
+            print(received_data[pos+4:].decode())
+            continue
+    
+    mysock.close()
+    
+except:
+    print("It was not possible to connect to the given URL")
