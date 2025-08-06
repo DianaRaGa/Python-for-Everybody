@@ -81,5 +81,3 @@ while True:
     code_p = js['features'][0]['properties']['plus_code']
     clean_codep = code_p.replace('"','')
     print(f"The plus code for the location is: {code_p}")
-
-
